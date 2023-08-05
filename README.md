@@ -2,7 +2,7 @@
 ## 2days challenge to build game with redux
 ### wanted to be more responsive due to the time limit is not
 
-
+# TL:DR //
 
 
 Redux Toolkit TypeScript Example
