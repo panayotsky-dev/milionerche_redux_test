@@ -1,4 +1,4 @@
-'use client'
+
 import { redirect } from 'next/navigation'
 import CategoryDrop from './components/CategoryDrop/CategoryDrop'
 import { Counter } from './components/Counter/Counter'
