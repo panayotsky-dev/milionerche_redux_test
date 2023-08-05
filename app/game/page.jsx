@@ -20,6 +20,7 @@ import { twMerge } from "tailwind-merge";
 import useSound from "use-sound";
 import { statsGame } from "../utils/data";
 import { redirect } from "next/dist/server/api-utils";
+import Status from "../components/Status/Status";
 
 // type Props = {};
 
@@ -30,6 +31,7 @@ function page() {
   const [currentLevel, setCurrentLevel] = useState(0); 
   const [currQ, setCurrQ] = useState({});
   const [pickedAnswer,setPickedAnswer] =useState()
+  const [haveLost,setHaveLost] = useState(false)
 //   const [answerIsCorrect] = useSound(correctAnswer)
 //   const [answerIsIncorrect] = useSound(wrongAnswer)
 
@@ -92,15 +94,15 @@ const wrong = ''
             setTimeout(() => {
 
                 questions[currentLevel]?.correct_answer === e.target.innerHTML ? setCurrentLevel(currentLevel +1) : ""
-                questions[currentLevel]?.correct_answer === e.target.innerHTML ? dispatch(counterSlice.actions.levelUp) : redirect('/result')
+                questions[currentLevel]?.correct_answer === e.target.innerHTML ? dispatch(counterSlice.actions.levelUp) : setHaveLost(true)
                 setPickedAnswer(null)
                 if(currentLevel ===5 || currentLevel === 10 || currentLevel === 15 ){
-                  const filteredStatsForMoney = statsGame.filter((stats) => stats.id === currentLevel);
+                  const filteredStatsForMoney = statsGame.filter((stats) => stats.id === currentLevel -1);
                   dispatch(counterSlice.actions.addMoney(filteredStatsForMoney.money))
                 }
                 
-                setPickedAnswer(null)
-                questions[currentLevel]?.correct_answer === e.target.innerHTML ? console.log('yes') : console.log('no')
+                
+                questions[currentLevel]?.correct_answer === e.target.innerHTML ? console.log('yes') : setHaveLost(true)
             },4000)
 
     }
@@ -112,7 +114,7 @@ const wrong = ''
         style={{
           backgroundImage: "url('./background01.webp')",
         }}
-      >{questions &&(
+      >{questions && !haveLost&&(
         <div className="grid grid-cols-3">
           <div className=" rounded-xl col-start-1 col-end-3 h-screen ">
             <div className="grid grid-rows-2">
@@ -161,7 +163,9 @@ const wrong = ''
           </div>
         </div>
       )}
-        
+        {haveLost&& (
+          <Status />
+        )}
       </div>
     </>
   );
