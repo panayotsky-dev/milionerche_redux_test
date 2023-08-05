@@ -78,7 +78,7 @@ function page() {
     questions ? console.log(questions[currentLevel]?.correct_answer) :""
   }, [questions]);
  
-  ;
+  console.log(questions[currentLevel]?.correct_answer)
   
   const audioRef = useRef(null);
 const wrong = ''
@@ -91,8 +91,9 @@ const wrong = ''
         
             setTimeout(() => {
 
-                questions[currentLevel]?.correct_answer === e.target.innerHTML ? setCurrentLevel(currentLevel +1) : 
+                questions[currentLevel]?.correct_answer === e.target.innerHTML ? setCurrentLevel(currentLevel +1) : ""
                 questions[currentLevel]?.correct_answer === e.target.innerHTML ? dispatch(counterSlice.actions.levelUp) : redirect('/result')
+                setPickedAnswer(null)
                 if(currentLevel ===5 || currentLevel === 10 || currentLevel === 15 ){
                   const filteredStatsForMoney = statsGame.filter((stats) => stats.id === currentLevel);
                   dispatch(counterSlice.actions.addMoney(filteredStatsForMoney.money))
@@ -111,8 +112,8 @@ const wrong = ''
         style={{
           backgroundImage: "url('./background01.webp')",
         }}
-      >{questions && (
-<div className="grid grid-cols-3">
+      >{questions &&(
+        <div className="grid grid-cols-3">
           <div className=" rounded-xl col-start-1 col-end-3 h-screen ">
             <div className="grid grid-rows-2">
               <div className="  h-full w-full ">zzzzz</div>
