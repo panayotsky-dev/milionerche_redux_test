@@ -1,4 +1,11 @@
-# Redux Toolkit TypeScript Example
+# https://milionerche-redux-test.vercel.app
+## 2days challenge to build game with redux
+### wanted to be more responsive due to the time limit is not
+
+
+
+
+Redux Toolkit TypeScript Example
 
 This example shows how to integrate Next.js with [Redux Toolkit](https://redux-toolkit.js.org).
 
