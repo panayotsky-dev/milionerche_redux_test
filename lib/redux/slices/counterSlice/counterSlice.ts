@@ -71,8 +71,8 @@ export const counterSlice = createSlice({
       }
        
     },
-    levelUp: (state) => {
-      state.level +=1
+    levelUp: (state,action: PayloadAction<number>) => {
+      state.level = action.payload
     },
     addMoney: (state, action: PayloadAction<number>) => {
       state.money += action.payload

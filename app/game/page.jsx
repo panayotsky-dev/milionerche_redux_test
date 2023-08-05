@@ -87,8 +87,7 @@ const wrong = ''
 
     const handleSelectedAnswer = (e) =>{
         setPickedAnswer(e.target.innerHTML);
-        
-        console.log(e.target.innerHTML)
+       
         
         
             setTimeout(() => {
@@ -96,9 +95,9 @@ const wrong = ''
                 questions[currentLevel]?.correct_answer === e.target.innerHTML ? setCurrentLevel(currentLevel +1) : ""
                 questions[currentLevel]?.correct_answer === e.target.innerHTML ? dispatch(counterSlice.actions.levelUp) : setHaveLost(true)
                 setPickedAnswer(null)
-                if(currentLevel ===5 || currentLevel === 10 || currentLevel === 15 ){
-                  const filteredStatsForMoney = statsGame.filter((stats) => stats.id === currentLevel -1);
-                  dispatch(counterSlice.actions.addMoney(filteredStatsForMoney.money))
+                if(currentLevel ===4 || currentLevel === 9 || currentLevel === 14 ){
+                  const filteredStatsForMoney = statsGame.filter((stats) => stats.id === currentLevel+1);
+                  dispatch(counterSlice.actions.addMoney((filteredStatsForMoney[0].money)))
                 }
                 
                 

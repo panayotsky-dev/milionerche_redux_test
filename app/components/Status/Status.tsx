@@ -30,11 +30,12 @@ function Status({}: Props) {
             <motion.div className='bg-slate-400 mt-40 flex  px-2 py-2 rounded-xl'>
                 <div>
                     <h1>Hello, {user}</h1>
-                    <h1>You have won : {money}</h1>
+                    <h1>You have won : $ {money}</h1>
                     <h1>Answered questions: {answered}</h1>
                 </div>
                 <div>
-                <button className='rounded-xl bg-slate-600 text-green-500 px-4 py-2 items-center justify-center mx-4 flex mt-4 '> Try again</button>
+                    <a href='/'>
+                <button   className='rounded-xl bg-slate-600 text-green-500 px-4 py-2 items-center justify-center mx-4 flex mt-4 '> Try again</button></a>
                 </div>
                    
                 
