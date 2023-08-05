@@ -91,17 +91,29 @@ const wrong = ''
         
         
             setTimeout(() => {
-
-                questions[currentLevel]?.correct_answer === e.target.innerHTML ? setCurrentLevel(currentLevel +1) : ""
-                questions[currentLevel]?.correct_answer === e.target.innerHTML ? dispatch(counterSlice.actions.levelUp) : setHaveLost(true)
+              if(questions[currentLevel]?.correct_answer === e.target.innerHTML ){
+                setCurrentLevel(currentLevel +1)
+                dispatch(counterSlice.actions.levelUp(currentLevel +1))
                 setPickedAnswer(null)
-                if(currentLevel ===4 || currentLevel === 9 || currentLevel === 14 ){
-                  const filteredStatsForMoney = statsGame.filter((stats) => stats.id === currentLevel+1);
-                  dispatch(counterSlice.actions.addMoney((filteredStatsForMoney[0].money)))
-                }
+              }else{
+                setHaveLost(true)
+                setPickedAnswer(null)
+              }
+              if(currentLevel ===4 || currentLevel === 9 || currentLevel === 14 ){
+                const filteredStatsForMoney = statsGame.filter((stats) => stats.id === currentLevel+1);
+                dispatch(counterSlice.actions.addMoney((filteredStatsForMoney[0].money)))
+              }
+
+                // questions[currentLevel]?.correct_answer === e.target.innerHTML ? setCurrentLevel(currentLevel +1) : ""
+                // questions[currentLevel]?.correct_answer === e.target.innerHTML ? dispatch(counterSlice.actions.levelUp) : setHaveLost(true)
+                // setPickedAnswer(null)
+                // if(currentLevel ===4 || currentLevel === 9 || currentLevel === 14 ){
+                //   const filteredStatsForMoney = statsGame.filter((stats) => stats.id === currentLevel+1);
+                //   dispatch(counterSlice.actions.addMoney((filteredStatsForMoney[0].money)))
+                // }
                 
                 
-                questions[currentLevel]?.correct_answer === e.target.innerHTML ? console.log('yes') : setHaveLost(true)
+                // questions[currentLevel]?.correct_answer === e.target.innerHTML ? console.log('yes') : setHaveLost(true)
             },4000)
 
     }

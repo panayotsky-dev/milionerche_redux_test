@@ -71,11 +71,12 @@ export const counterSlice = createSlice({
       }
        
     },
-    levelUp: (state,action: PayloadAction<number>) => {
-      state.level = action.payload
+    levelUp: (state,action :PayloadAction<number>) => {
+       state.level = action.payload
+       
     },
     addMoney: (state, action: PayloadAction<number>) => {
-      state.money += action.payload
+      state.money = action.payload
     },
     addUrl: (state, action: PayloadAction<string>) => {
       
