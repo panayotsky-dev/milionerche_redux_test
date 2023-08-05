@@ -12,3 +12,6 @@ export const selectUrl = (state:ReduxState) => state.counter.url
 export const selectQuestions = (state:ReduxState) => state.counter.questions
 export const selectIsAuth = (state:ReduxState) => state.counter.isAuth
 export const test = (action:ReduxState) => action.counter.isAuth
+
+export const levelUp = (action:ReduxState) => action.counter.level
+export const addMoney = (action:ReduxState) => action.counter.money

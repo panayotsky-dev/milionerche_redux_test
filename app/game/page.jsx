@@ -18,6 +18,8 @@ import {
 import Stats from "../components/Stats/Stats";
 import { twMerge } from "tailwind-merge";
 import useSound from "use-sound";
+import { statsGame } from "../utils/data";
+import { redirect } from "next/dist/server/api-utils";
 
 // type Props = {};
 
@@ -87,7 +89,13 @@ const wrong = ''
         
         
             setTimeout(() => {
-                questions[currentLevel]?.correct_answer === e.target.innerHTML ? setCurrentLevel(currentLevel +1) : setCurrentLevel(0)
+
+                questions[currentLevel]?.correct_answer === e.target.innerHTML ? setCurrentLevel(currentLevel +1) : 
+                questions[currentLevel]?.correct_answer === e.target.innerHTML ? dispatch(counterSlice.actions.levelUp) : redirect('/result')
+                if(currentLevel ===5 || currentLevel === 10 || currentLevel === 15 ){
+                  const filteredStatsForMoney = statsGame.filter((stats) => stats.id === currentLevel);
+                  dispatch(counterSlice.actions.addMoney(filteredStatsForMoney.money))
+                }
                 
                 setPickedAnswer(null)
                 questions[currentLevel]?.correct_answer === e.target.innerHTML ? console.log('yes') : console.log('no')
@@ -99,9 +107,9 @@ const wrong = ''
     <>
       <div
         className=" overflow-hidden w-full h-screen"
-        // style={{
-        //   backgroundImage: "url('./background01.webp')",
-        // }}
+        style={{
+          backgroundImage: "url('./background01.webp')",
+        }}
       >
         <div className="grid grid-cols-3">
           <div className=" rounded-xl col-start-1 col-end-3 h-screen ">
