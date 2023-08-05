@@ -26,6 +26,7 @@ import { redirect } from "next/dist/server/api-utils";
 function page() {
   const dispatch = useDispatch();
   const rUrl = useSelector(selectUrl);
+  
   const [currentLevel, setCurrentLevel] = useState(0); 
   const [currQ, setCurrQ] = useState({});
   const [pickedAnswer,setPickedAnswer] =useState()
@@ -35,10 +36,10 @@ function page() {
   useEffect(() => {
     const dataFetch = async () => {
       //to replace staticUrl to rUrl
-      const staticUrl =
+      const staticUrl = 
         "https://opentdb.com/api.php?amount=15&category=9&difficulty=easy&type=multiple";
       //rUrl
-      const data = await (await fetch(staticUrl)).json();
+      const data = await (await fetch(rUrl)).json();
 
       const questionsWithId = data.results.map((question, index) => ({
         ...question,
@@ -110,8 +111,8 @@ const wrong = ''
         style={{
           backgroundImage: "url('./background01.webp')",
         }}
-      >
-        <div className="grid grid-cols-3">
+      >{questions && (
+<div className="grid grid-cols-3">
           <div className=" rounded-xl col-start-1 col-end-3 h-screen ">
             <div className="grid grid-rows-2">
               <div className="  h-full w-full ">zzzzz</div>
@@ -158,6 +159,8 @@ const wrong = ''
             <Stats level={currentLevel} />
           </div>
         </div>
+      )}
+        
       </div>
     </>
   );
